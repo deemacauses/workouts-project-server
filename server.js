@@ -15,6 +15,7 @@ app.use((req, res, next) => {
 
 // Set up routes
 app.use("/api/workouts", routes.workout)
+app.use("/api/user", routes.user)
 
 // Set up database
 mongoose

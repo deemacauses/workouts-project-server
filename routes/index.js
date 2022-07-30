@@ -1,2 +1,3 @@
 const workout = require("./workout")
-module.exports = { workout }
+const user = require("./user")
+module.exports = { workout, user }
