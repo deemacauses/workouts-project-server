@@ -8,6 +8,12 @@ const app = express()
 
 // Set up middleware
 app.use(express.json())
+
+app.get("/", (request, response, next) => {
+  response.redirect("/api/workouts")
+  next()
+})
+
 app.use((request, response, next) => {
   console.log(request.path, request.method)
   next()
