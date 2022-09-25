@@ -3,7 +3,10 @@ const models = require("../../models")
 
 // Get all workouts
 const getWorkouts = async (request, response) => {
-  const workouts = await models.workout.find({}).sort({ createdAt: -1 })
+  const user_id = request.user._id
+  const workouts = await models.workout
+    .find({ user_id })
+    .sort({ createdAt: -1 })
   response.status(200).json(workouts)
 }
 
@@ -30,7 +33,8 @@ const createWorkout = async (request, response) => {
       .json({ error: "Please fill in all the fields", emptyFields })
 
   try {
-    const workout = await models.workout.create({ title, load, reps })
+    const user_id = request.user._id
+    const workout = await models.workout.create({ title, load, reps, user_id })
     response.status(200).json(workout)
   } catch (error) {
     response.status(400).json({ error: error.message })
